@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Player/bullet.png" type="Texture" id=1]
+[ext_resource path="res://Player/Bullet.gd" type="Script" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 5.07831, 1.60887 )
+
+[node name="Bullet" type="Area2D"]
+collision_mask = 2
+script = ExtResource( 2 )
+speed = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+
+[node name="Death" type="Timer" parent="."]
+autostart = true
+[connection signal="area_entered" from="." to="." method="_on_Bullet_area_entered"]
+[connection signal="timeout" from="Death" to="." method="_on_Timer_timeout"]
